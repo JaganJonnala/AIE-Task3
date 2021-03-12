@@ -1,0 +1,124 @@
+<style>
+  /* Responsive Styles */
+  @media screen and (max-width: 767px) {
+
+    .card-container>*:not(.circle-link),
+    .terminal {
+      width: 100%;
+    }
+
+    .card:not(.highlight-card) {
+      height: 16px;
+      margin: 8px 0;
+    }
+
+    .card.highlight-card span {
+      margin-left: 72px;
+    }
+
+    svg#rocket-smoke {
+      right: 120px;
+      transform: rotate(-5deg);
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    svg#rocket-smoke {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+</style>
+
+<h6 class="text-uppercase heading">Shopping Cart ({{products.length}})</h6>
+
+<div class="content" role="main">
+  <table class="table text-left">
+    <thead class="text-left">
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Price</th>
+        <th scope="col">Total</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody class="text-left">
+      <tr *ngFor="let product of products;let index=index;">
+        <th class="first">
+          <div class="lb-blue">
+            {{product.brandName}}
+            {{product.itemName}}
+          </div>
+          <span class="lb-blue">Model : {{product.modelNumber}} | Sku : {{product.modelCode}}</span>
+          <div class="prom-msg">{{product.bmFinanceDetail.financePromoMsg}}</div>
+          <div class="del-options mt-20">
+            <span> <label> Choose your Delivery Option : </label></span>
+            <span class="dropdown ml-20">
+              <button class="btn btn-primary dropdown-toggle bg-tr" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{product.shippingType}}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" *ngFor="let method of shippingMethods" type="button" (click)="dr1OptionClick(product,method)">{{method}}</button>
+              </div>
+            </span>
+          </div>
+        </th>
+        <td>
+          <button class="symb" [disabled]="product.itemQuantity <= 1" (click)="reduceQuantity(product)">-</button>
+          <span class="numb">{{product.itemQuantity}}</span>
+          <button class="symb" [disabled]="product.itemQuantity >= 10" (click)="addQuantity(product)">+</button>
+          <div *ngIf="product.itemQuantity >= 10" class="max-msg">Maximum of 10 only can be added to the cart per
+            product</div>
+          <span class="dropdown" [ngClass]="index == 0 ? 't-60' : 't-42'" *ngIf="product.stores && product.stores.length">
+            <button class="btn btn-primary dropdown-toggle bg-tr" type="button" id="dropdownMenu2" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              {{product.storeDropdownValue}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item" *ngFor="let store of product.stores" type="button" (click)="dr2OptionClick(product,store)">{{store.storeName}}-{{store.state}}-{{store.storeDistance}}</button>
+            </div>
+          </span>
+        </td>
+        <td>${{product.itemAmount.itemPrice}}</td>
+        <td>${{product.itemAmount.itemTotalPrice}}</td>
+        <td><a href="#" (click)="removeItem(product)">Remove</a></td>
+      </tr>
+    </tbody>
+
+    <div *ngIf="products.length === 0" class="n_f_msg"> NO PRODUCTS AVAILABLE </div>
+  </table>
+
+  <div class="cartDiv">
+    <h6 class="text-uppercase">Order summary</h6>
+    <hr />
+
+    <div>
+      <span> <label> SubTotal </label></span>
+      <span class="fl-right"> <label> ${{subTotal}} </label></span>
+    </div>
+
+    <div>
+      <span> <label> Estimated Shipping </label></span>
+      <span class="fl-right"> <label> ${{estShipping}} </label></span>
+    </div>
+    <hr>
+
+    <div>
+      <span> <label> Estimated Total </label></span>
+      <span class="fl-right"> <label> ${{estTotal}} </label></span>
+    </div>
+
+    <hr>
+
+    <div>
+      <span> <label class="c-red">*</label></span>
+      <span> <b>Sales Tax will be calcualted at checkout </b></span>
+    </div>
+
+    <button class="btn btn-primary btn-bg-red">START SECURED CHECKOUT </button>
+  </div>
+</div>
+<router-outlet></router-outlet>
