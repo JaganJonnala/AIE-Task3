@@ -6,6 +6,9 @@ Steps to Run project
 1. npm install
 2. npm start
 
+![image](https://user-images.githubusercontent.com/10844009/110992288-baacfa00-839b-11eb-8d0d-651e99fb60c8.png)
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
