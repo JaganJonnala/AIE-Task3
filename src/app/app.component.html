@@ -67,7 +67,7 @@
           </div>
         </th>
         <td>
-          <button class="symb" [disabled]="product.itemQuantity <= 1" (click)="reduceQuantity(product)">-</button>
+          <button class="symb" [disabled]="product.itemQuantity <= 0" (click)="reduceQuantity(product)">-</button>
           <span class="numb">{{product.itemQuantity}}</span>
           <button class="symb" [disabled]="product.itemQuantity >= 10" (click)="addQuantity(product)">+</button>
           <div *ngIf="product.itemQuantity >= 10" class="max-msg">Maximum of 10 only can be added to the cart per
