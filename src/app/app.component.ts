@@ -25,7 +25,18 @@ export class AppComponent {
   }
 
   private getAllShippingMethods(){
-    return this.products.map((item) => item.shippingType);
+    return this.getUniq(this.products.map((item) => item.shippingType));
+  }
+
+
+  private getUniq(input) {
+    let arr :any= [];
+    for (var i = 0; i < input.length; i++) {
+      if (arr.indexOf(input[i]) === -1) {
+        arr.push(input[i]);
+      }
+    }
+    return arr;
   }
 
   private getProducts(){
