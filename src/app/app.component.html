@@ -34,7 +34,7 @@
 <h6 class="text-uppercase heading">Shopping Cart ({{products.length}})</h6>
 
 <div class="content" role="main">
-  <table class="table text-left">
+  <table class="table text-left col-md-8">
     <thead class="text-left">
       <tr>
         <th scope="col">Product</th>
@@ -67,9 +67,9 @@
           </div>
         </th>
         <td>
-          <button class="symb" [disabled]="product.itemQuantity <= 0" (click)="reduceQuantity(product)">-</button>
-          <span class="numb">{{product.itemQuantity}}</span>
-          <button class="symb" [disabled]="product.itemQuantity >= 10" (click)="addQuantity(product)">+</button>
+          <button class="btn btn-outline-dark" [disabled]="product.itemQuantity <= 0" (click)="reduceQuantity(product)">-</button>
+          <span class="btn btn-primay">{{product.itemQuantity}}</span>
+          <button class="btn btn-outline-dark" [disabled]="product.itemQuantity >= 10" (click)="addQuantity(product)">+</button>
           <div *ngIf="product.itemQuantity >= 10" class="max-msg">Maximum of 10 only can be added to the cart per
             product</div>
           <span class="dropdown" [ngClass]="index == 0 ? 't-60' : 't-42'" *ngIf="product.stores && product.stores.length">
@@ -84,14 +84,16 @@
         </td>
         <td>${{product.itemAmount.itemPrice}}</td>
         <td>${{product.itemAmount.itemTotalPrice}}</td>
-        <td><a href="#" (click)="removeItem(product)">Remove</a></td>
+        <td>
+          <a href="#" (click)="removeItem(product)">Remove<i class="fas fa-trash-alt"></i></a>
+        </td>
       </tr>
     </tbody>
 
     <div *ngIf="products.length === 0" class="n_f_msg"> NO PRODUCTS AVAILABLE </div>
   </table>
 
-  <div class="cartDiv">
+  <div class="cartDiv col-md-3">
     <h6 class="text-uppercase">Order summary</h6>
     <hr />
 
